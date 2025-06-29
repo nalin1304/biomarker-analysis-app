@@ -12,7 +12,7 @@ import json
 from datetime import datetime
 
 st.set_page_config(
-    page_title= " MammoWise Smarter screening Deeper insights."
+    page_title="MammoWise Smarter screening Deeper insights"
     page_icon="🔬",
     layout="wide",
     initial_sidebar_state="expanded"
