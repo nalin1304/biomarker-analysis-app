@@ -209,7 +209,7 @@ if 'gradcam_image' not in st.session_state:
 
 st.markdown("""
 <div class="main-header">
-    <h1>🔬 Biomarker Analysis Platform</h1>
+    <h1>🔬 MammoWise: Smarter screening Deeper insights </h1>
     <p>Advanced Cancer Subtype Prediction Using Deep Learning & Biomarker Analysis</p>
 </div>
 """, unsafe_allow_html=True)
