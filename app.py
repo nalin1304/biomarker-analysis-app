@@ -11,7 +11,6 @@ import requests
 import json
 from datetime import datetime
 
-# Page configuration
 st.set_page_config(
     page_title="Biomarker Analysis Platform",
     page_icon="🔬",
@@ -19,7 +18,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for green and gold theme
+
 st.markdown("""
 <style>
     /* Main theme colors */
@@ -199,7 +198,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Initialize session state
+
 if 'uploaded_image' not in st.session_state:
     st.session_state.uploaded_image = None
 if 'prediction_results' not in st.session_state:
@@ -207,7 +206,7 @@ if 'prediction_results' not in st.session_state:
 if 'gradcam_image' not in st.session_state:
     st.session_state.gradcam_image = None
 
-# Header
+
 st.markdown("""
 <div class="main-header">
     <h1>🔬 Biomarker Analysis Platform</h1>
@@ -215,25 +214,25 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Sidebar - Model Information
+
 with st.sidebar:
-    st.markdown("### 📊 Model Information")
+    st.markdown("###  Model Information")
     
-    with st.expander("🧠 How Our Model Works"):
+    with st.expander(" How Our Model Works"):
         st.markdown("""
         **Multi-Modal Deep Learning Approach:**
         
-        🔍 **Image Analysis:**
+         **Image Analysis:**
         - Convolutional Neural Networks analyze histopathological images
         - Extracts cellular patterns, morphology, and tissue architecture
         - Identifies key visual biomarkers automatically
         
-        🧬 **Biomarker Integration:**
+         **Biomarker Integration:**
         - Combines molecular markers (Ki-67, HER2, EGFR) with imaging data
         - Considers staining intensity and cellular localization
         - Provides comprehensive molecular profiling
         
-        🎯 **Prediction Engine:**
+         **Prediction Engine:**
         - Ensemble model combining image and biomarker features
         - Outputs probability scores for each cancer subtype
         - Provides explainable AI through Grad-CAM visualization
@@ -273,11 +272,10 @@ with st.sidebar:
         - Therapeutic target identification
         """)
 
-# Main content area
 col1, col2 = st.columns([1, 1])
 
 with col1:
-    # Image Upload Section
+
     st.markdown('<div class="stCard">', unsafe_allow_html=True)
     st.markdown('<h3 class="section-header">📸 Image Upload</h3>', unsafe_allow_html=True)
     
@@ -288,24 +286,22 @@ with col1:
     )
     
     if uploaded_file is not None:
-        # Display uploaded image
+       
         image = Image.open(uploaded_file)
         st.session_state.uploaded_image = image
         st.image(image, caption="Uploaded Image", use_column_width=True)
-        
-        # Image details
+  
         st.markdown("**Image Details:**")
         st.write(f"📏 Size: {image.size[0]} × {image.size[1]} pixels")
         st.write(f"📄 Format: {image.format}")
         st.write(f"💾 File size: {len(uploaded_file.getvalue()) / 1024:.1f} KB")
     
     st.markdown('</div>', unsafe_allow_html=True)
-    
-    # Biomarker Input Section
+ 
     st.markdown('<div class="stCard">', unsafe_allow_html=True)
     st.markdown('<h3 class="section-header">🧬 Biomarker Configuration</h3>', unsafe_allow_html=True)
     
-    # Biomarker selection
+
     biomarker_options = ['Ki-67', 'HER2', 'EGFR', 'ER', 'PR', 'p53', 'BRCA1', 'BRCA2']
     selected_biomarker = st.selectbox(
         "Select Biomarker",
@@ -313,7 +309,7 @@ with col1:
         help="Choose the primary biomarker for analysis"
     )
     
-    # Intensity selection
+  
     intensity_options = ['Weak', 'Moderate', 'Strong']
     selected_intensity = st.selectbox(
         "Staining Intensity",
@@ -322,7 +318,7 @@ with col1:
         help="Select the observed staining intensity"
     )
     
-    # Staining type selection
+
     staining_options = ['Nuclear', 'Cytoplasmic', 'Membranous', 'Mixed']
     selected_staining = st.selectbox(
         "Staining Pattern",
@@ -330,7 +326,6 @@ with col1:
         help="Choose the cellular localization pattern"
     )
     
-    # Additional biomarker info
     st.markdown("**Selected Configuration:**")
     st.write(f"🔬 Biomarker: **{selected_biomarker}**")
     st.write(f"💪 Intensity: **{selected_intensity}**")
@@ -339,19 +334,18 @@ with col1:
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
-    # Prediction Section
+
     st.markdown('<div class="stCard">', unsafe_allow_html=True)
     st.markdown('<h3 class="section-header">🚀 Run Analysis</h3>', unsafe_allow_html=True)
     
-    # Prediction button
+    
     if st.button("🔍 Analyze Sample", type="primary"):
         if st.session_state.uploaded_image is not None:
             with st.spinner("🔬 Analyzing image and biomarkers..."):
-                # Simulate model prediction (replace with actual API call)
-                import time
-                time.sleep(2)  # Simulate processing time
+            
+              
                 
-                # Mock prediction results
+                
                 prediction_probs = {
                     'TNBC': np.random.random(),
                     'IDC': np.random.random(),
@@ -359,16 +353,14 @@ with col2:
                     'ILC': np.random.random()
                 }
                 
-                # Normalize probabilities
+                
                 total = sum(prediction_probs.values())
                 prediction_probs = {k: v/total for k, v in prediction_probs.items()}
                 
-                # Store results
+             
                 st.session_state.prediction_results = prediction_probs
                 
-                # Generate mock Grad-CAM (replace with actual Grad-CAM generation)
-                gradcam_array = np.random.rand(224, 224, 3)
-                st.session_state.gradcam_image = gradcam_array
+               
                 
             st.success("✅ Analysis completed successfully!")
         else:
@@ -376,26 +368,25 @@ with col2:
     
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Results Display
+
     if st.session_state.prediction_results is not None:
         st.markdown('<div class="stCard">', unsafe_allow_html=True)
         st.markdown('<h3 class="section-header">📊 Prediction Results</h3>', unsafe_allow_html=True)
         
-        # Get top prediction
+  
         top_prediction = max(st.session_state.prediction_results.items(), key=lambda x: x[1])
         
-        # Display top prediction prominently
+       
         st.markdown(f"""
         <div class="metric-card">
             <div class="metric-value">{top_prediction[0]}</div>
             <div class="metric-label">Predicted Subtype ({top_prediction[1]:.1%} confidence)</div>
         </div>
         """, unsafe_allow_html=True)
-        
-        # Confidence scores chart
+
         st.markdown("**Confidence Scores:**")
         
-        # Create horizontal bar chart
+      
         fig = go.Figure()
         
         colors = ['#2E7D32', '#4CAF50', '#FFD700', '#B8860B']
@@ -428,10 +419,10 @@ with col2:
         
         st.markdown('</div>', unsafe_allow_html=True)
 
-# Full-width sections
+
 st.markdown("---")
 
-# Grad-CAM Visualization
+
 if st.session_state.gradcam_image is not None:
     st.markdown('<div class="stCard">', unsafe_allow_html=True)
     st.markdown('<h3 class="section-header">🎯 Grad-CAM Heatmap Visualization</h3>', unsafe_allow_html=True)
@@ -454,7 +445,7 @@ if st.session_state.gradcam_image is not None:
     
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Model Explainability Panel
+
 st.markdown('<div class="info-panel">', unsafe_allow_html=True)
 st.markdown("### 🔍 Model Explainability & Clinical Relevance")
 
@@ -489,12 +480,12 @@ with col3:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Download Report Section
+
 if st.session_state.prediction_results is not None:
     st.markdown('<div class="stCard">', unsafe_allow_html=True)
     st.markdown('<h3 class="section-header">📄 Generate Report</h3>', unsafe_allow_html=True)
     
-    # Create report data
+
     report_data = {
         'Analysis Date': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'Biomarker': selected_biomarker,
@@ -505,13 +496,10 @@ if st.session_state.prediction_results is not None:
         'All Predictions': st.session_state.prediction_results
     }
     
-    # Display report summary
+
     st.markdown("**Report Summary:**")
     st.json(report_data)
     
-    # Download button (mock - replace with actual PDF generation)
-    if st.button("📥 Download PDF Report"):
-        st.success("📄 Report generated! (Feature coming soon)")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -526,13 +514,9 @@ st.markdown("""
 
 # API Integration Helper Function (for when you connect to your backend)
 def call_prediction_api(image_data, biomarker_data):
-    """
-    Function to call your trained model API
-    Replace the URL with your actual endpoint
-    """
-    api_url = "https://your-model-endpoint.com/predict"
+    api_url = ""
     
-    # Prepare data
+
     payload = {
         "image": base64.b64encode(image_data).decode('utf-8'),
         "biomarker": biomarker_data['biomarker'],
@@ -548,22 +532,16 @@ def call_prediction_api(image_data, biomarker_data):
         st.error(f"API Error: {e}")
         return None
 
-# Utility function for image preprocessing
+
 def preprocess_image(image):
-    """
-    Preprocess image for model input
-    """
-    # Resize image
-    image = image.resize((224, 224))
     
-    # Convert to RGB if needed
+
+    image = image.resize((224, 224))
+
     if image.mode != 'RGB':
         image = image.convert('RGB')
-    
-    # Convert to numpy array
     img_array = np.array(image)
-    
-    # Normalize pixel values
+
     img_array = img_array / 255.0
     
     return img_array
