@@ -12,7 +12,8 @@ import json
 from datetime import datetime
 
 st.set_page_config(
-    page_title="Biomarker Analysis Platform",
+    page_title= "MammoWise
+Smarter screening. Deeper insights."
     page_icon="🔬",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -259,17 +260,29 @@ with st.sidebar:
     
     with st.expander("⚡ Feature Importance"):
         st.markdown("""
-        **Image Features:**
-        - Nuclear morphology and pleomorphism
-        - Mitotic activity patterns
-        - Tissue architecture disruption
-        - Cellular density and organization
-        
-        **Biomarker Features:**
-        - Expression levels and intensity
-        - Cellular localization patterns
-        - Molecular pathway activation
-        - Therapeutic target identification
+**Feature Overview for Histopathological Cancer Classification**
+
+**Image-Based Features:**
+
+* High-resolution histopathological whole-slide scans
+* Detailed analysis of tissue architecture and cellular morphology
+* Assessment of nuclear atypia and staining intensity
+* Deep feature extraction using a pretrained ResNet-18 convolutional neural network (CNN)
+
+**Biomarker-Based Features:**
+
+* Expression profiling of key biomarkers including Ki-67, EGFR, HER2, TP53, CDH1, PTEN, BRCA1, RB1, ESR1, and others
+* Quantitative evaluation of expression intensity (weak, moderate, strong)
+* Staining localization patterns (nuclear, cytoplasmic, membranous)
+* Spatial distribution and characteristic patterns, such as E-cadherin loss in invasive lobular carcinoma (ILC)
+
+**Labels (Histological Subtypes):**
+
+* Triple-Negative Breast Cancer (TNBC)
+* Invasive Ductal Carcinoma (IDC)
+* Metaplastic Breast Carcinoma (MBC)
+* Invasive Lobular Carcinoma (ILC)
+
         """)
 
 col1, col2 = st.columns([1, 1])
